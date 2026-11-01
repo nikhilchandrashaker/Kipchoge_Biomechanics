@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kipchoge Marathon Biomechanics Lab</title>
+<style>
+:root{--bg:#f5f4ef;--card:#fff;--tx:#1b211e;--mu:#5d6762;--ln:#d8dbd4;--ac:#d9480f;--ac2:#0b7285;--bone:#2b3430;--far:#a3aba7;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121614;--card:#1b211e;--tx:#e8ece9;--mu:#9aa6a0;--ln:#323b36;--ac:#ff7a45;--ac2:#3bc0d6;--bone:#dfe6e2;--far:#5d6862}}
+:root[data-theme="dark"]{--bg:#121614;--card:#1b211e;--tx:#e8ece9;--mu:#9aa6a0;--ln:#323b36;--ac:#ff7a45;--ac2:#3bc0d6;--bone:#dfe6e2;--far:#5d6862}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:16px}
+h1{font-size:1.5rem;margin:.2em 0}h2{font-size:1.1rem;margin:0 0 .5em}
+.sub{color:var(--mu);margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:14px;margin-bottom:14px}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+button{font:inherit;border:1px solid var(--ln);background:var(--bg);color:var(--tx);border-radius:999px;padding:6px 12px;cursor:pointer}
+button:hover{border-color:var(--ac)}
+.ctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+label{display:block;font-size:.85rem;color:var(--mu)}label b{color:var(--tx)}
+input[type=range]{width:100%;accent-color:var(--ac)}
+canvas{width:100%;display:block;border-radius:10px;background:var(--bg)}
+#cv{height:340px}#rc{height:230px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:.88rem}td{padding:3px 0;border-bottom:1px solid var(--ln)}td:last-child{text-align:right;font-weight:600}
+.bar{display:flex;align-items:center;gap:8px;font-size:.85rem;margin:5px 0}.bar span{width:150px;color:var(--mu)}
+.bar i{flex:1;height:9px;background:var(--ln);border-radius:5px;overflow:hidden}.bar u{display:block;height:100%;width:0;background:var(--ac)}
+.note{font-size:.8rem;color:var(--mu)}
+</style></head><body><div class="wrap">
+<h1>Kipchoge Marathon Biomechanics Lab</h1>
+<p class="sub">Explore what happens in the legs and the fuel tank at record marathon pace. Simplified educational model, not measured data from Kipchoge.</p>
+
+<div class="card">
+<div class="row" id="pre"></div>
+<div class="ctl">
+<label>Speed <b id="sv"></b><input id="spd" type="range" min="10" max="22" step="0.1" value="21.2"></label>
+<label>Cadence <b id="cv1"></b><input id="cad" type="range" min="160" max="200" step="1" value="182"></label>
+<label>Animation speed <b id="slv"></b><input id="slow" type="range" min="0.05" max="1" step="0.05" value="0.2"></label>
+</div></div>
+
+<div class="card"><h2>Leg model: one gait cycle</h2>
+<div class="row"><button id="pp">Pause</button></div>
+<canvas id="cv"></canvas>
+<p class="note">Darker orange = more muscle activation (schematic). The blue arrow is ground reaction force, scaled in body weights (BW).</p>
+<div class="grid">
+<div><table id="st"></table></div>
+<div>
+<div class="bar"><span>Glutes</span><i><u id="mg"></u></i></div>
+<div class="bar"><span>Hamstrings</span><i><u id="mh"></u></i></div>
+<div class="bar"><span>Quadriceps</span><i><u id="mq"></u></i></div>
+<div class="bar"><span>Hip flexors</span><i><u id="mf"></u></i></div>
+<div class="bar"><span>Calf (gastroc/soleus)</span><i><u id="mc"></u></i></div>
+<div class="bar"><span>Tibialis anterior</span><i><u id="mt"></u></i></div>
+<div class="bar"><span>Ground force</span><i><u id="mgrf" style="background:var(--ac2)"></u></i></div>
+</div></div></div>
+
+<div class="card"><h2>Race and fuel simulator</h2>
+<div class="ctl">
+<label>Body mass <b id="mv"></b><input id="mass" type="range" min="45" max="85" step="1" value="52"></label>
+<label>Carbs eaten <b id="cv2"></b><input id="carb" type="range" min="0" max="120" step="5" value="60"></label>
+<label><input id="shoe" type="checkbox"> Carbon-plate shoes (about 4% lower energy cost)</label>
+<label><input id="draft" type="checkbox"> Pacer V-formation drafting (about 3% lower cost)</label>
+</div>
+<canvas id="rc" style="margin-top:10px"></canvas>
+<table id="rs" style="margin-top:8px"></table>
+<p class="note">Assumes about 1 kcal per kg per km, a 450 g glycogen store, and gut absorption capped near 90 g/h. Heavier runners burn more total energy for the same pace.</p>
+</div></div>
+
+<script>
+const $=id=>document.getElementById(id),css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const R=Math.PI/180,L1=.43,L2=.43;
+let t=0,last=0,k=1,s=.3,cad=182,v=5.88,W=0,Hh=0,rw=0,rh=0,play=true,Fp=2.6;
+const cv=$('cv'),cx=cv.getContext('2d'),rc=$('rc'),rx=rc.getContext('2d');
+function fit(c){const r=c.getBoundingClientRect(),d=devicePixelRatio||1;c.width=Math.round(r.width*d);c.height=Math.round(r.height*d);c.getContext('2d').setTransform(d,0,0,d,0,0);return[r.width,r.height]}
+const mmss=x=>{x=Math.round(x);return Math.floor(x/60)+':'+String(x%60).padStart(2,'0')};
+const hms=x=>{x=Math.round(x);return Math.floor(x/3600)+':'+String(Math.floor(x%3600/60)).padStart(2,'0')+':'+String(x%60).padStart(2,'0')};
+const PRE=[['Recreational',12],['Sub-3:00',14.1],['Berlin 2018 (2:01:39)',20.8],['Berlin 2022 (2:01:09)',20.9],['Vienna 2019 (1:59:40)',21.2]];
+PRE.forEach(([n,x])=>{const b=document.createElement('button');b.textContent=n+' · '+x+' km/h';b.onclick=()=>{$('spd').value=x;if(x==21.2){$('shoe').checked=true;$('draft').checked=true}update()};$('pre').appendChild(b)});
+
+function leg(ph){let hip,knee,foot;
+ if(ph<s){const u=ph/s;hip=(25-55*u)*k;knee=20+25*Math.sin(Math.PI*u)+5*u;foot=u<.55?0:-55*(u-.55)/.45}
+ else{const w=(ph-s)/(1-s);hip=k*(-30+77.8*Math.sin(Math.PI*w*.75));knee=25-5*w+90*Math.sin(Math.PI*Math.pow(w,.7));foot=(hip-knee)-10*Math.sin(Math.PI*w)}
+ const kn=[L1*Math.sin(hip*R),-L1*Math.cos(hip*R)],a=(hip-knee)*R,an=[kn[0]+L2*Math.sin(a),kn[1]-L2*Math.cos(a)],f=foot*R,d=[Math.cos(f),Math.sin(f)],n=[Math.sin(f),-Math.cos(f)];
+ const he=[an[0]-.06*d[0]+.08*n[0],an[1]-.06*d[1]+.08*n[1]],to=[an[0]+.17*d[0]+.08*n[0],an[1]+.17*d[1]+.08*n[1]];
+ return{hip,kn,an,he,to,low:Math.min(he[1],to[1])}}
+const g=(p,c,w)=>{let d=Math.abs(p-c);d=Math.min(d,1-d);return Math.exp(-d*d/(2*w*w))};
+function acts(p){const sw=x=>s+(1-s)*x;return{
+ q:.12+.85*g(p,s*.35,s*.3)+.3*g(p,sw(.92),.05),
+ h:.85*g(p,sw(.88),.07)+.55*g(p,s*.12,s*.22),
+ g:.9*g(p,s*.2,s*.28)+.2*g(p,sw(.9),.05),
+ f:.9*g(p,sw(.3),.09),
+ c:.95*g(p,s*.72,s*.28),
+ t:.7*g(p,sw(.6),.12)+.7*g(p,.02,.04)}}
+
+function update(){
+ const vk=+$('spd').value;v=vk/3.6;cad=+$('cad').value;
+ const step=v/(cad/60);k=Math.max(.6,Math.min(1.25,step/1.9));
+ const ct=Math.max(.14,.30-.0165*v);s=Math.min(.45,ct/(120/cad));
+ const fl=Math.max(0,60/cad-ct);Fp=1.6+.18*v;const spl=42195/step/2,imp=.64*Fp*ct;
+ $('sv').textContent=vk.toFixed(1)+' km/h';$('cv1').textContent=cad+' steps/min';$('slv').textContent=Math.round(+$('slow').value*100)+'%';
+ const rows=[['Pace per km',mmss(1000/v)],['Pace per mile',mmss(1609.34/v)],['Step length',step.toFixed(2)+' m'],['Ground contact time',Math.round(ct*1000)+' ms'],['Flight time per step',Math.round(fl*1000)+' ms'],['Peak ground force',Fp.toFixed(1)+' × BW'],['Foot strikes per leg, full marathon',Math.round(spl).toLocaleString('en-US')],['Total impulse per leg',Math.round(spl*imp).toLocaleString('en-US')+' BW·s'],['Marathon finish time',hms(42195/v)]];
+ $('st').innerHTML=rows.map(r=>'<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>').join('');
+ race()}
+
+function draw(){
+ const cycle=120/cad,ph=((t/cycle)%1+1)%1,phB=(ph+.5)%1,ph2=ph%.5,A=leg(ph),B=leg(phB);
+ let H;if(ph2<s)H=-leg(ph2).low;else{const f=(ph2-s)/(.5-s);H=-leg(s).low*(1-f)-leg(0).low*f+.05*Math.sin(Math.PI*f)}
+ H=Math.max(H,-Math.min(A.low,B.low));
+ const gy=Hh*.86,sc=Hh*.5,hx=W*.42,P=p=>[hx+p[0]*sc,gy-(H+p[1])*sc];
+ const bone=css('--bone'),far=css('--far'),ac=css('--ac'),ac2=css('--ac2'),mu=css('--mu'),ln=css('--ln');
+ cx.clearRect(0,0,W,Hh);cx.lineCap='round';cx.lineJoin='round';
+ cx.strokeStyle=ln;cx.lineWidth=2;cx.beginPath();cx.moveTo(0,gy);cx.lineTo(W,gy);cx.stroke();
+ const o=v*t,i0=Math.floor((o-hx/sc)/.5)-1,n=Math.ceil(W/sc/.5)+3;
+ cx.fillStyle=mu;cx.font='11px system-ui';
+ for(let i=i0;i<i0+n;i++){const x=hx+(i*.5-o)*sc;cx.beginPath();cx.moveTo(x,gy);cx.lineTo(x,gy+(i%2?5:10));cx.stroke();if(!(i%2)&&i>=0)cx.fillText((i/2)+' m',x+2,gy+22)}
+ const seg=(p,q,w,c)=>{cx.strokeStyle=c;cx.lineWidth=w;cx.beginPath();cx.moveTo(p[0],p[1]);cx.lineTo(q[0],q[1]);cx.stroke()};
+ const dl=(l,c,w)=>{const h=P([0,0]),kk=P(l.kn),a=P(l.an),he=P(l.he),to=P(l.to);seg(h,kk,w,c);seg(kk,a,w*.85,c);seg(a,he,w*.45,c);seg(a,to,w*.45,c);seg(he,to,w*.45,c)};
+ const sh=[.5*Math.sin(8*R),.5*Math.cos(8*R)];
+ const arm=(al,c)=>{const e=[sh[0]+.28*Math.sin(al),sh[1]-.28*Math.cos(al)],w=[e[0]+.27*Math.sin(al+1.5),e[1]-.27*Math.cos(al+1.5)];seg(P(sh),P(e),9,c);seg(P(e),P(w),8,c)};
+ arm(-.8*B.hip*R,far);dl(B,far,12);
+ seg(P([0,0]),P(sh),15,bone);const hd=P([sh[0]+.1*Math.sin(8*R),sh[1]+.11]);cx.fillStyle=bone;cx.beginPath();cx.arc(hd[0],hd[1],.095*sc,0,7);cx.fill();
+ dl(A,bone,13);
+ const a=acts(ph),band=(l,w,f0,f1,off,act,wd)=>{const[P0,P1]=w=='t'?[[0,0],l.kn]:[l.kn,l.an],dx=P1[0]-P0[0],dy=P1[1]-P0[1],m=Math.hypot(dx,dy),nx=-dy/m,ny=dx/m,q=f=>P([P0[0]+dx*f+nx*off,P0[1]+dy*f+ny*off]);
+  const p0=q(f0),p1=q(f1);cx.lineWidth=wd*sc;cx.globalAlpha=.2;cx.strokeStyle=mu;cx.beginPath();cx.moveTo(p0[0],p0[1]);cx.lineTo(p1[0],p1[1]);cx.stroke();cx.globalAlpha=.1+.85*act;cx.strokeStyle=ac;cx.stroke();cx.globalAlpha=1};
+ band(A,'t',.2,.9,.045,a.q,.07);band(A,'t',.1,.9,-.045,a.h,.07);band(A,'t',.02,.35,.07,a.f,.05);band(A,'s',.05,.6,-.045,a.c,.08);band(A,'s',.15,.8,.035,a.t,.045);
+ const gp=P([-.06,.02]);cx.globalAlpha=.2;cx.fillStyle=mu;cx.beginPath();cx.arc(gp[0],gp[1],.08*sc,0,7);cx.fill();cx.globalAlpha=.1+.85*a.g;cx.fillStyle=ac;cx.fill();cx.globalAlpha=1;
+ arm(-.8*A.hip*R,bone);
+ const st=ph<s?A:(phB<s?B:null);let F=0;
+ if(st){const u=ph2/s;F=Fp*Math.pow(Math.sin(Math.PI*u),1.1);const p=P([(st.he[0]+st.to[0])/2,(st.he[1]+st.to[1])/2]),len=F*.13*sc;
+  seg(p,[p[0],p[1]-len],4,ac2);cx.fillStyle=ac2;cx.beginPath();cx.moveTo(p[0],p[1]-len-9);cx.lineTo(p[0]-6,p[1]-len);cx.lineTo(p[0]+6,p[1]-len);cx.fill();
+  cx.font='12px system-ui';cx.fillText(F.toFixed(1)+' × BW',p[0]+10,p[1]-len)}
+ [['mq',a.q],['mh',a.h],['mg',a.g],['mf',a.f],['mc',a.c],['mt',a.t],['mgrf',F/Fp]].forEach(([id,x])=>$(id).style.width=Math.round(Math.min(1,x)*100)+'%')}
+
+function race(){
+ const vk=+$('spd').value,m=+$('mass').value,ci=+$('carb').value,ig=Math.min(ci,90),sh=$('shoe').checked,dr=$('draft').checked;
+ $('mv').textContent=m+' kg';$('cv2').textContent=ci+' g/h';
+ const kk=m*(sh?.96:1)*(dr?.97:1),cf=Math.max(.55,Math.min(.9,.55+.0275*(vk-10))),burn=kk*cf/4,inn=ig/vk,net=burn-inn,store=450,wall=net>0?store/net:Infinity;
+ [rw,rh]=fit(rc);const w=rw,h=rh,l=44,r=12,tp=12,b=28,X=d=>l+(w-l-r)*d/42.195,Y=gm=>tp+(h-tp-b)*(1-gm/500);
+ rx.clearRect(0,0,w,h);rx.font='11px system-ui';rx.fillStyle=css('--mu');rx.strokeStyle=css('--ln');rx.lineWidth=1;
+ for(let gm=0;gm<=500;gm+=100){rx.beginPath();rx.moveTo(l,Y(gm));rx.lineTo(w-r,Y(gm));rx.stroke();rx.fillText(gm+' g',4,Y(gm)+4)}
+ [0,10,20,30,40].forEach(d=>rx.fillText(d+' km',X(d)-12,h-8));
+ rx.strokeStyle=css('--ac');rx.lineWidth=3;rx.beginPath();
+ for(let d=0;d<=42.2;d+=.5){const gm=Math.max(0,Math.min(500,store-net*d));d?rx.lineTo(X(d),Y(gm)):rx.moveTo(X(d),Y(gm))}rx.stroke();
+ if(wall<42.195){rx.setLineDash([5,4]);rx.strokeStyle=css('--ac2');rx.beginPath();rx.moveTo(X(wall),tp);rx.lineTo(X(wall),h-b);rx.stroke();rx.setLineDash([]);rx.fillStyle=css('--ac2');rx.fillText('wall: km '+wall.toFixed(1),Math.max(l,X(wall)-70),tp+10)}
+ const left=Math.max(0,store-net*42.195);
+ const rows=[['Finish time',hms(42195/(vk/3.6))],['Energy cost used',(kk*1).toFixed(1)+' kcal/km'],['Total energy burned',Math.round(kk*42.195).toLocaleString('en-US')+' kcal'],['Carbs burned',Math.round(burn*42.195)+' g'],['Carbs eaten (absorbed)',Math.round(inn*42.195)+' g'],['Glycogen status',wall<42.195?'Runs out at km '+wall.toFixed(1):'About '+Math.round(left)+' g left at finish']];
+ $('rs').innerHTML=rows.map(x=>'<tr><td>'+x[0]+'</td><td>'+x[1]+'</td></tr>').join('')}
+
+function frame(ts){if(!last)last=ts;const dt=Math.min(.1,(ts-last)/1000);last=ts;if(play)t+=dt*+$('slow').value;draw();requestAnimationFrame(frame)}
+function resize(){[W,Hh]=fit(cv);race()}
+['spd','cad','slow','mass','carb','shoe','draft'].forEach(id=>$(id).addEventListener('input',update));
+$('pp').onclick=()=>{play=!play;$('pp').textContent=play?'Pause':'Play'};
+addEventListener('resize',resize);matchMedia('(prefers-color-scheme:dark)').addEventListener('change',race);
+resize();update();requestAnimationFrame(frame);
+</script></body></html>

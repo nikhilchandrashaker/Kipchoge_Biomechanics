@@ -1,0 +1,173 @@
+scenario,speed_km_h,mass_kg,carb_intake_g_h,carbon_shoes,drafting,km,glycogen_g
+"No carbs, standard shoes",21.16,52.0,0,False,False,0,450.0
+"No carbs, standard shoes",21.16,52.0,0,False,False,1,438.9
+"No carbs, standard shoes",21.16,52.0,0,False,False,2,427.7
+"No carbs, standard shoes",21.16,52.0,0,False,False,3,416.6
+"No carbs, standard shoes",21.16,52.0,0,False,False,4,405.4
+"No carbs, standard shoes",21.16,52.0,0,False,False,5,394.3
+"No carbs, standard shoes",21.16,52.0,0,False,False,6,383.2
+"No carbs, standard shoes",21.16,52.0,0,False,False,7,372.0
+"No carbs, standard shoes",21.16,52.0,0,False,False,8,360.9
+"No carbs, standard shoes",21.16,52.0,0,False,False,9,349.8
+"No carbs, standard shoes",21.16,52.0,0,False,False,10,338.6
+"No carbs, standard shoes",21.16,52.0,0,False,False,11,327.5
+"No carbs, standard shoes",21.16,52.0,0,False,False,12,316.3
+"No carbs, standard shoes",21.16,52.0,0,False,False,13,305.2
+"No carbs, standard shoes",21.16,52.0,0,False,False,14,294.1
+"No carbs, standard shoes",21.16,52.0,0,False,False,15,282.9
+"No carbs, standard shoes",21.16,52.0,0,False,False,16,271.8
+"No carbs, standard shoes",21.16,52.0,0,False,False,17,260.6
+"No carbs, standard shoes",21.16,52.0,0,False,False,18,249.5
+"No carbs, standard shoes",21.16,52.0,0,False,False,19,238.4
+"No carbs, standard shoes",21.16,52.0,0,False,False,20,227.2
+"No carbs, standard shoes",21.16,52.0,0,False,False,21,216.1
+"No carbs, standard shoes",21.16,52.0,0,False,False,22,205.0
+"No carbs, standard shoes",21.16,52.0,0,False,False,23,193.8
+"No carbs, standard shoes",21.16,52.0,0,False,False,24,182.7
+"No carbs, standard shoes",21.16,52.0,0,False,False,25,171.5
+"No carbs, standard shoes",21.16,52.0,0,False,False,26,160.4
+"No carbs, standard shoes",21.16,52.0,0,False,False,27,149.3
+"No carbs, standard shoes",21.16,52.0,0,False,False,28,138.1
+"No carbs, standard shoes",21.16,52.0,0,False,False,29,127.0
+"No carbs, standard shoes",21.16,52.0,0,False,False,30,115.8
+"No carbs, standard shoes",21.16,52.0,0,False,False,31,104.7
+"No carbs, standard shoes",21.16,52.0,0,False,False,32,93.6
+"No carbs, standard shoes",21.16,52.0,0,False,False,33,82.4
+"No carbs, standard shoes",21.16,52.0,0,False,False,34,71.3
+"No carbs, standard shoes",21.16,52.0,0,False,False,35,60.2
+"No carbs, standard shoes",21.16,52.0,0,False,False,36,49.0
+"No carbs, standard shoes",21.16,52.0,0,False,False,37,37.9
+"No carbs, standard shoes",21.16,52.0,0,False,False,38,26.7
+"No carbs, standard shoes",21.16,52.0,0,False,False,39,15.6
+"No carbs, standard shoes",21.16,52.0,0,False,False,40,4.5
+"No carbs, standard shoes",21.16,52.0,0,False,False,41,0.0
+"No carbs, standard shoes",21.16,52.0,0,False,False,42,0.0
+"60 g/h, standard shoes",21.16,52.0,60,False,False,0,450.0
+"60 g/h, standard shoes",21.16,52.0,60,False,False,1,441.7
+"60 g/h, standard shoes",21.16,52.0,60,False,False,2,433.4
+"60 g/h, standard shoes",21.16,52.0,60,False,False,3,425.1
+"60 g/h, standard shoes",21.16,52.0,60,False,False,4,416.8
+"60 g/h, standard shoes",21.16,52.0,60,False,False,5,408.5
+"60 g/h, standard shoes",21.16,52.0,60,False,False,6,400.2
+"60 g/h, standard shoes",21.16,52.0,60,False,False,7,391.9
+"60 g/h, standard shoes",21.16,52.0,60,False,False,8,383.6
+"60 g/h, standard shoes",21.16,52.0,60,False,False,9,375.3
+"60 g/h, standard shoes",21.16,52.0,60,False,False,10,367.0
+"60 g/h, standard shoes",21.16,52.0,60,False,False,11,358.7
+"60 g/h, standard shoes",21.16,52.0,60,False,False,12,350.4
+"60 g/h, standard shoes",21.16,52.0,60,False,False,13,342.1
+"60 g/h, standard shoes",21.16,52.0,60,False,False,14,333.8
+"60 g/h, standard shoes",21.16,52.0,60,False,False,15,325.5
+"60 g/h, standard shoes",21.16,52.0,60,False,False,16,317.2
+"60 g/h, standard shoes",21.16,52.0,60,False,False,17,308.9
+"60 g/h, standard shoes",21.16,52.0,60,False,False,18,300.6
+"60 g/h, standard shoes",21.16,52.0,60,False,False,19,292.3
+"60 g/h, standard shoes",21.16,52.0,60,False,False,20,284.0
+"60 g/h, standard shoes",21.16,52.0,60,False,False,21,275.7
+"60 g/h, standard shoes",21.16,52.0,60,False,False,22,267.3
+"60 g/h, standard shoes",21.16,52.0,60,False,False,23,259.0
+"60 g/h, standard shoes",21.16,52.0,60,False,False,24,250.7
+"60 g/h, standard shoes",21.16,52.0,60,False,False,25,242.4
+"60 g/h, standard shoes",21.16,52.0,60,False,False,26,234.1
+"60 g/h, standard shoes",21.16,52.0,60,False,False,27,225.8
+"60 g/h, standard shoes",21.16,52.0,60,False,False,28,217.5
+"60 g/h, standard shoes",21.16,52.0,60,False,False,29,209.2
+"60 g/h, standard shoes",21.16,52.0,60,False,False,30,200.9
+"60 g/h, standard shoes",21.16,52.0,60,False,False,31,192.6
+"60 g/h, standard shoes",21.16,52.0,60,False,False,32,184.3
+"60 g/h, standard shoes",21.16,52.0,60,False,False,33,176.0
+"60 g/h, standard shoes",21.16,52.0,60,False,False,34,167.7
+"60 g/h, standard shoes",21.16,52.0,60,False,False,35,159.4
+"60 g/h, standard shoes",21.16,52.0,60,False,False,36,151.1
+"60 g/h, standard shoes",21.16,52.0,60,False,False,37,142.8
+"60 g/h, standard shoes",21.16,52.0,60,False,False,38,134.5
+"60 g/h, standard shoes",21.16,52.0,60,False,False,39,126.2
+"60 g/h, standard shoes",21.16,52.0,60,False,False,40,117.9
+"60 g/h, standard shoes",21.16,52.0,60,False,False,41,109.6
+"60 g/h, standard shoes",21.16,52.0,60,False,False,42,101.3
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,0,450.0
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,1,442.5
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,2,434.9
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,3,427.4
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,4,419.9
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,5,412.3
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,6,404.8
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,7,397.2
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,8,389.7
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,9,382.2
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,10,374.6
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,11,367.1
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,12,359.6
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,13,352.0
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,14,344.5
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,15,337.0
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,16,329.4
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,17,321.9
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,18,314.4
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,19,306.8
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,20,299.3
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,21,291.7
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,22,284.2
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,23,276.7
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,24,269.1
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,25,261.6
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,26,254.1
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,27,246.5
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,28,239.0
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,29,231.5
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,30,223.9
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,31,216.4
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,32,208.8
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,33,201.3
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,34,193.8
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,35,186.2
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,36,178.7
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,37,171.2
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,38,163.6
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,39,156.1
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,40,148.6
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,41,141.0
+"60 g/h, shoes + drafting",21.16,52.0,60,True,True,42,133.5
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,0,450.0
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,1,443.9
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,2,437.8
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,3,431.6
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,4,425.5
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,5,419.4
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,6,413.3
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,7,407.2
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,8,401.1
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,9,394.9
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,10,388.8
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,11,382.7
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,12,376.6
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,13,370.5
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,14,364.3
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,15,358.2
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,16,352.1
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,17,346.0
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,18,339.9
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,19,333.8
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,20,327.6
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,21,321.5
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,22,315.4
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,23,309.3
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,24,303.2
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,25,297.1
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,26,290.9
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,27,284.8
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,28,278.7
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,29,272.6
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,30,266.5
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,31,260.3
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,32,254.2
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,33,248.1
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,34,242.0
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,35,235.9
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,36,229.8
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,37,223.6
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,38,217.5
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,39,211.4
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,40,205.3
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,41,199.2
+"90 g/h, shoes + drafting",21.16,52.0,90,True,True,42,193.0

@@ -1,0 +1,4 @@
+race,date,location,finish_time_hms,finish_time_s,avg_speed_m_s,avg_speed_km_h,pace_min_per_km,pace_min_per_mile,record_eligible,notes
+Berlin Marathon 2018,2018-09-16,"Berlin, Germany",2:01:39,7299,5.781,20.81,2:53,4:38,yes,World record at the time
+INEOS 1:59 Challenge,2019-10-12,"Vienna, Austria",1:59:40,7180,5.877,21.16,2:50,4:34,no,"Pacemaker rotation, laser pace guide and drink delivery; not record-eligible"
+Berlin Marathon 2022,2022-09-25,"Berlin, Germany",2:01:09,7269,5.805,20.90,2:52,4:37,yes,World record at the time; broken by Kelvin Kiptum in 2023
